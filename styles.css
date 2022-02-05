@@ -1,0 +1,56 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    background: #EEF9BF;
+    position: relative;
+}
+.contador {
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    font-size: 60px;
+}
+.jogo {
+    margin: 0 auto;
+    width: 906px; 
+    height: max-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+h1 {
+    width: 100vw;
+    height: 63px;
+    margin-bottom: 30px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 56px;
+    line-height: 66px;
+    letter-spacing: -0.004em;
+    color: #75B79E;
+    text-align: center;
+}
+#p01 {
+    margin: 17px;
+    width: 117px;
+    height: 146px;
+    background: #A7E9AF;
+    border: 1px solid #99CEA8;
+    box-sizing: border-box;
+    border-radius: 5px;
+    position: relative;
+}
+#p01 img {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 24px;
+    left: 10px;
+}
+
+@media (max-width: 906px) {
+    .jogo {
+        width: 100vw;
+    }
+} 
