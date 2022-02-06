@@ -43,30 +43,26 @@ function iniciar() {
      }
 }  
 
-let primeira = null, idd1 = null;
+let primeira = null, idd1 = null, acertos = 0, trava = false;
 function vira(idd) {
     if (jogadas == 0){
         contar();
     }
-    jogadas++;
-   
-    //let conferirVirada = document.querySelector(".jogo");
-    if  (idd !== idd1) {
+    jogadas++;   
+    if  (idd !== idd1 && trava == false) {
       if (primeira !== null){
-
-        if (primeira === cartas[idd]) {
-          
+        if (primeira === cartas[idd]) {    //   desvira ambas
           primeira = null;
           let retirarCarta1 = document.querySelector(".carta"+idd);
           retirarCarta1.removeAttribute("onclick");
           let retirarCarta2 = document.querySelector(".carta"+idd1);
-          retirarCarta2.removeAttribute("onclick");
-        //   remove onclick
+          retirarCarta2.removeAttribute("onclick");    
+          acertos++;    
         }else{
           primeira = null;
-
           setTimeout (desvira, 1000);
-          function desvira() {
+          trava = true;
+          function desvira() {    //   desvira ambas
             let virarb = document.querySelector(".fronttface" + idd);
             virarb.classList.toggle("frontface");
             let virara = document.querySelector(".backkface" + idd);
@@ -75,15 +71,13 @@ function vira(idd) {
             virard.classList.toggle("frontface");
             let virarc = document.querySelector(".backkface" + idd1);
             virarc.classList.toggle("backface");
-          }
-        //   desvira ambas
-        }
-
+            trava = false;
+          }        
+        }  
         let virarb = document.querySelector(".fronttface" + idd);
         virarb.classList.toggle("frontface");
         let virara = document.querySelector(".backkface" + idd);
-        virara.classList.toggle("backface");
-        
+        virara.classList.toggle("backface");        
       }else{
         
         let virarb = document.querySelector(".fronttface" + idd);
@@ -94,6 +88,9 @@ function vira(idd) {
         primeira = cartas[idd];
         idd1 = idd;
       }
+    }
+    if (acertos*2 == qtdCartas) {
+      alert("você ganhou com: " + jogadas + " jogadas.")
     }
 }
 
