@@ -1,6 +1,6 @@
 let jogadas = 0;
 
-let qtdCartas = 10;
+let qtdCartas;
 
 let estoque = [
     "bobrossparrot.gif",
@@ -19,7 +19,7 @@ function comparador() {
 
 /////////////////////
 function iniciar() {
-    //qtdCartas = prompt("digite a quantidade de cartas");
+    qtdCartas = prompt("digite a quantidade de cartas");
 
     if (qtdCartas > 14) {qtdCartas = 14;}
     if (qtdCartas < 4) {qtdCartas = 4;}
@@ -36,40 +36,64 @@ function iniciar() {
         const painel = document.querySelector(".jogo");
         
         painel.innerHTML += `
-        <div  onclick= "vira('p${i}')" >
-        <img class="backkfacep${i}" src="/arquivos img/front.png" alt="back">
-        <img class="fronttfacep${i} fronttface" src="/arquivos img/${cartas[i]}" alt="front">
+        <div class="carta${i}" onclick= "vira('${i}')" >
+        <img class="backkface${i}" src="/arquivos img/front.png" alt="back">
+        <img class="fronttface${i} fronttface ${cartas[i]}" src="/arquivos img/${cartas[i]}" alt="front">
         </div>`;
      }
 }  
 
+let primeira = null, idd1 = null;
 function vira(idd) {
     if (jogadas == 0){
         contar();
     }
     jogadas++;
+   
+    //let conferirVirada = document.querySelector(".jogo");
+    if  (idd !== idd1) {
+      if (primeira !== null){
 
-    let conferirVirada = document.querySelector(".jogo");
+        if (primeira === cartas[idd]) {
+          
+          primeira = null;
+          let retirarCarta1 = document.querySelector(".carta"+idd);
+          retirarCarta1.removeAttribute("onclick");
+          let retirarCarta2 = document.querySelector(".carta"+idd1);
+          retirarCarta2.removeAttribute("onclick");
+        //   remove onclick
+        }else{
+          primeira = null;
 
-    if (conferirVirada.classList.contains("frontface")){
+          setTimeout (desvira, 1000);
+          function desvira() {
+            let virarb = document.querySelector(".fronttface" + idd);
+            virarb.classList.toggle("frontface");
+            let virara = document.querySelector(".backkface" + idd);
+            virara.classList.toggle("backface");
+            let virard = document.querySelector(".fronttface" + idd1);
+            virard.classList.toggle("frontface");
+            let virarc = document.querySelector(".backkface" + idd1);
+            virarc.classList.toggle("backface");
+          }
+        //   desvira ambas
+        }
 
-      let virarb = document.querySelector(".fronttface" + idd);
-      virarb.classList.toggle("frontface");
-      let virara = document.querySelector(".backkface" + idd);
-      virara.classList.toggle("backface");
-      
-      // if (primeira === segunda) {
-      //   remove onclick de ambas
-      // }else{
-      //   desvira ambas
-      // }
-
-    }else{
-
-    let virarb = document.querySelector(".fronttface" + idd);
-    virarb.classList.toggle("frontface");
-    let virara = document.querySelector(".backkface" + idd);
-    virara.classList.toggle("backface");
+        let virarb = document.querySelector(".fronttface" + idd);
+        virarb.classList.toggle("frontface");
+        let virara = document.querySelector(".backkface" + idd);
+        virara.classList.toggle("backface");
+        
+      }else{
+        
+        let virarb = document.querySelector(".fronttface" + idd);
+        virarb.classList.toggle("frontface");
+        let virara = document.querySelector(".backkface" + idd);
+        virara.classList.toggle("backface");
+        
+        primeira = cartas[idd];
+        idd1 = idd;
+      }
     }
 }
 
@@ -84,5 +108,5 @@ function contar() {
         tempo.innerHTML++;
       }
     }
-    intervalo = setInterval(decrementa, 1000);
+    intervalo = setInterval (decrementa, 1000);
   }
