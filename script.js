@@ -19,11 +19,26 @@ function comparador() {
 
 /////////////////////
 function iniciar() {
-    qtdCartas = prompt("digite a quantidade de cartas");
 
-    if (qtdCartas > 14) {qtdCartas = 14;}
-    if (qtdCartas < 4) {qtdCartas = 4;}
-    if (qtdCartas%2 !== 0) {qtdCartas--;}
+    function testar() {
+    if (qtdCartas > 14) {
+        qtdCartas = prompt ("digite um número menor que 14");
+        testar();
+      }
+      if (qtdCartas < 4) {
+        qtdCartas = prompt ("digite um número maior que 4");
+        testar();
+      }
+      if (qtdCartas%2 !== 0) {
+        qtdCartas = prompt ("digite um número par");
+        testar();
+      }
+    }
+    qtdCartas = prompt("digite a quantidade de cartas par entre 4 e 14");
+    testar();
+    // if (qtdCartas > 14) {qtdCartas = 14;}
+    // if (qtdCartas < 4) {qtdCartas = 4;}
+    // if (qtdCartas%2 !== 0) {qtdCartas--;}
 
     estoque.sort(comparador);
     for (let i = 0; i < 2; i++) {

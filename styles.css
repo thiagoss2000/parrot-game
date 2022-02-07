@@ -7,7 +7,7 @@ body{
 .contador {
     position: absolute;
     top: 40px;
-    right: 80px;
+    right: 15vw;
     font-size: 60px;
 }
 .jogo {
@@ -74,8 +74,16 @@ h1 {
       }
       .contador {
         font-size: 30px;
-        right: 30px;
+        right: 10vw;
         top: 50px;
       }
     }
-     
+    @media (max-width: 500px) {
+        .jogo {
+            width:300px;
+          }
+        h1 {
+            width: 300px;
+            margin-left: calc(50vw - 150px);
+        }
+    }
