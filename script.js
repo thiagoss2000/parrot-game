@@ -46,9 +46,9 @@ let primeira = null, idd1 = null, acertos = 0, trava = false, tempo = 0;
 function vira(idd) {
     if (jogadas == 0){
         contar();
-    }
-    jogadas++;   
+    } 
     if  (idd !== idd1 && trava == false) {
+      jogadas++;  
       if (primeira !== null){
         if (primeira === cartas[idd]) {    //   desvira ambas
           primeira = null;
