@@ -67,5 +67,15 @@ h1 {
 @media (max-width: 906px) {
     .jogo {
         width: 100vw;
+      }
+      h1 {
+        font-size: 36px;
+        line-height: 42px;
+      }
+      .contador {
+        font-size: 30px;
+        right: 30px;
+        top: 50px;
+      }
     }
-} 
+     

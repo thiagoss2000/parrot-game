@@ -33,17 +33,16 @@ function iniciar() {
     }
     cartas.sort(comparador);
     for (let i = 0; i < qtdCartas; i++) {
-        const painel = document.querySelector(".jogo");
-        
+        const painel = document.querySelector(".jogo");        
         painel.innerHTML += `
-        <div class="carta${i}" onclick= "vira('${i}')" >
-        <img class="backkface${i}" src="/arquivos img/front.png" alt="back">
-        <img class="fronttface${i} fronttface ${cartas[i]}" src="/arquivos img/${cartas[i]}" alt="front">
+        <div class="carta${i}" onclick= "vira('${i}')"  data-identifier="card">
+        <img class="backkface${i}" data-identifier="back-face" src="/arquivos img/front.png" alt="back">
+        <img class="fronttface${i} fronttface ${cartas[i]}" data-identifier="front-face" src="/arquivos img/${cartas[i]}" alt="front">
         </div>`;
      }
 }  
 
-let primeira = null, idd1 = null, acertos = 0, trava = false;
+let primeira = null, idd1 = null, acertos = 0, trava = false, tempo = 0;
 function vira(idd) {
     if (jogadas == 0){
         contar();
@@ -90,13 +89,24 @@ function vira(idd) {
       }
     }
     if (acertos*2 == qtdCartas) {
-      alert("você ganhou com: " + jogadas + " jogadas.")
+      let resposta = prompt(`você ganhou com: ${jogadas} jogadas. Seu tempo foi de: ${tempo.innerHTML} segundos \n deseja jogar novamente? (sim)`);
+      clearInterval(intervalo);
+      if (resposta == "sim") {
+        primeira = null, idd1 = null, acertos = 0, trava = false, tempo.innerHTML = 0, jogadas = 0, cartas = [];
+        const painel = document.querySelector(".jogo");
+        painel.innerHTML = ` `;
+        iniciar();
+      }else{
+        const agradecimento = document.querySelector("h1");
+        agradecimento.innerHTML = "Obrigado por Jogar";
+        const painel = document.querySelector(".jogo");
+        painel.innerHTML = ` `;
+      }
     }
 }
-
 function contar() {
     
-    let tempo = document.querySelector(".contador");
+    tempo = document.querySelector(".contador");
     tempo.innerHTML = 0;
     function decrementa() {
       if (tempo.innerHTML == 1000) {
